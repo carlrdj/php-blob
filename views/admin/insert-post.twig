@@ -1,0 +1,47 @@
+{% extends 'layout.twig' %}
+{% block content %}
+    			<h2>New Post</h2>
+					<p>
+						<a class="btn btn-default" href="{{ 'admin/posts' | url }}">Back</a>						
+					</p>
+					{% if result %}
+					<div class="alert alert-success">
+						Post Save
+					</div>
+					{% endif %}
+					<form method="post" onsubmit="return validateForm()">
+						<div class="form-group">
+							<label for="inputTitle">Title</label>
+							<input class="form-control" type="text" id="inputTitle" name="title">
+						</div>
+						<div class="form-group">
+							<label for="inputImg">Imagen</label>
+							<input class="form-control" type="text" id="inputImg" name="img">
+						</div>
+							<label for="inputContent">Content</label>
+						<textarea class="form-control" name="content" id="inputContent" rows="5"></textarea>
+						<br>
+						<input class="btn btn-primary" type="submit" value="Save">
+					</form>
+
+{% endblock %}
+{% block js %}
+    <script>
+    function validateForm() {
+    	var title = document.getElementById('inputTitle').value.trim();
+    	var content = document.getElementById('inputContent').value.trim();
+    	if (title === '') {
+    		swal(
+    			'Opops...',
+    			'Title is required'
+    			)
+    	}else if(content === ''){
+    		swal(
+    			'Opops...',
+    			'Content is required'
+    			)
+    	}
+    	return false;
+    }
+    </script>
+{% endblock %}

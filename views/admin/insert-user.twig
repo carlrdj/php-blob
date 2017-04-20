@@ -1,0 +1,56 @@
+{% extends 'layout.twig' %}
+{% block content %}
+    			<h2>New User</h2>
+					<p>
+						<a class="btn btn-default" href="{{ 'admin/users' | url }}">Back</a>						
+					</p>
+
+			    {% if errors %}			    	
+						{% include 'partials/errors.twig' %}
+			    {% endif %}
+			    {% if result %}
+			        <div class="alert alert-success">User Saved!</div>
+			    {% endif %}
+					<form method="post" onsubmit="return validateForm()">
+						<div class="form-group">
+							<label for="inputName">Name</label>
+							<input class="form-control" type="text" id="inputName" name="name">
+						</div>
+						<div class="form-group">
+							<label for="inputEmail">E-mail</label>
+							<input class="form-control" type="text" id="inputEmail" name="email">
+						</div>
+						<div class="form-group">
+							<label for="inputPassword">Password</label>
+							<input class="form-control" type="password" id="inputPassword" name="password">
+						</div>
+						<br>
+						<input class="btn btn-primary" type="submit" value="Save">
+					</form>
+{% endblock %}
+{% block js %}
+    <script>
+    function validateForm() {
+    	var name = document.getElementById('inputName').value.trim();
+    	var email = document.getElementById('inputEmail').value.trim();
+    	var password = document.getElementById('inputPassword').value.trim();
+    	if (name === '') {
+    		swal(
+    			'Opops...',
+    			'Name is required'
+    			)
+    	}else if(email === ''){
+    		swal(
+    			'Opops...',
+    			'Email is required'
+    			)
+    	}else if(password === ''){
+    		swal(
+    			'Opops...',
+    			'Password is required'
+    			)
+    	}
+    	return false;
+    }
+    </script>
+{% endblock %}

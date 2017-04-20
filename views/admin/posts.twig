@@ -1,0 +1,28 @@
+{% extends 'layout.twig' %}
+{% block content %}
+    <h2>Posts</h2>
+					<a class="btn btn-default" href="{{ 'admin/posts/create' | url }}">New Post</a>
+					<table class="table">
+						<tr>
+							<th>Title</th>
+							<th>Edit</th>
+							<th>Delete</th>
+						</tr>
+						{% for blogPost in blogPosts %}
+						<tr>
+							<td>{{blogPost.titulo}}</td>
+							<td>
+								<a class="btn btn-success" href="{{ 'admin/posts/update/' | url }}{{blogPost.id}}">
+									Edit
+								</a>
+							</td>
+							<td>
+								<form method="post">
+									<input type="hidden" name="id" value="{{blogPost.id}}">
+									<button class="btn btn-danger">Eliminar</button>
+								</form>
+							</td>
+						</tr>
+						{% endfor %}
+					</table>
+{% endblock %}
